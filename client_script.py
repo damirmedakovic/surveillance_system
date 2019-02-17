@@ -6,7 +6,7 @@ import time
 def Main():
 
 	host = "localhost"
-	port = 5004
+	port = 5005
 
 	s = socket.socket()
 	s.connect((host, port))
@@ -34,6 +34,8 @@ def Main():
 				data = s.recv(1024)
 				total_recieved += len(data)
 				f.write(data)
+				print("Progress: ", total_recieved, "/", filesize)
+				
 			f.close()
 
 		print("Download complete!")

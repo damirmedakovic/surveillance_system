@@ -5,7 +5,11 @@ import numpy
 first_frame = None
 video = cv2.VideoCapture(0)
 
+#frm counts what frame we are on 
 frm = 0 
+
+#pause is used to avoid taking an exessive
+#amount of photos 
 pause = 0
 
 while True:
@@ -26,6 +30,8 @@ while True:
 		cv2.imshow("first", first_frame)
 		continue
 
+	#After the start frame is grabbed, we start detecting
+	#motion. 
 	if frm > 5: 
 		delta_frame = cv2.absdiff(first_frame, gray)
 		thresh_delta = cv2.threshold(delta_frame, 30, 255, cv2.THRESH_BINARY)[1]
@@ -41,15 +47,17 @@ while True:
 				cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
 				print("ALERT")
 				cv2.imwrite("images/frame{}.jpg".format(frm), frame)
+				#Reset the "timer". 10 frames later we recapture motion
+				#if there is any. 
 				pause = 0
 
 
 		cv2.imshow("capturing", frame)
-		cv2.imshow("gray", gray)
 
 		key = cv2.waitKey(1)
 
-		if key == ord('q'):
+		#Press x to quit
+		if key == ord('x'):
 			break 
 
 

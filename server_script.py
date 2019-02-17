@@ -8,7 +8,7 @@ import time
 def Main():
 
 	host = "localhost"
-	port = 5004
+	port = 5005
 
 	s = socket.socket()
 	s.bind((host, port))
@@ -27,9 +27,11 @@ def Main():
 			filecount = str(len(files))
 			c.send(filecount.encode())
 
+			file_number = 0
 			for file in files: 
 
-				print("DONKEY")
+				file_number += 1
+				print("Downloading file ", file_number, " ===============================")
 				filesize = str(os.path.getsize(f"images/{file}"))
 
 				print("Sending file with filesize: ", filesize)
@@ -42,7 +44,7 @@ def Main():
 					c.send(bytes_to_send)
 					total_bytes_sent = len(bytes_to_send)
 					while total_bytes_sent < filesize:
-						time.sleep(0.2)
+						time.sleep(0.05)
 						print("Progress ", total_bytes_sent, "/", filesize)
 						bytes_to_send = f.read(1024)
 						c.send(bytes_to_send)
