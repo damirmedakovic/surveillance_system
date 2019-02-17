@@ -6,7 +6,7 @@ import time
 def Main():
 
 	host = "localhost"
-	port = 5002
+	port = 5004
 
 	s = socket.socket()
 	s.connect((host, port))

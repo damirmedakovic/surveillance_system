@@ -8,7 +8,7 @@ import time
 def Main():
 
 	host = "localhost"
-	port = 5002
+	port = 5004
 
 	s = socket.socket()
 	s.bind((host, port))
@@ -42,8 +42,8 @@ def Main():
 					c.send(bytes_to_send)
 					total_bytes_sent = len(bytes_to_send)
 					while total_bytes_sent < filesize:
-						time.sleep(1)
-						print("Bytes ", total_bytes_sent)
+						time.sleep(0.2)
+						print("Progress ", total_bytes_sent, "/", filesize)
 						bytes_to_send = f.read(1024)
 						c.send(bytes_to_send)
 						total_bytes_sent += len(bytes_to_send)
