@@ -39,14 +39,17 @@ while True:
 
 		cnts,a = cv2.findContours(thresh_delta.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-		for contour in cnts: 
+		for contour in cnts:
+
 			if cv2.contourArea(contour) < 1000:
 				continue
+
 			if pause > 10:
 				(x, y, w, h) = cv2.boundingRect(contour)
 				cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
-				print("ALERT")
-				cv2.imwrite("images/frame{}.jpg".format(frm), frame)
+				print("[-] ALERT: Motion detected!")
+				timestamp = str(time.time())
+				cv2.imwrite("images/frame{}.jpg".format(timestamp), frame)
 				#Reset the "timer". 10 frames later we recapture motion
 				#if there is any. 
 				pause = 0
