@@ -4,7 +4,10 @@ from . import views
 
 
 
+app_name = "dashboard"
+
 urlpatterns = [
-	path('', views.home),
+	path('', views.home, name='home'),
+	path('create-camera/', views.create_camera, name='create-camera'),
 
 ]

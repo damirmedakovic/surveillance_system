@@ -25,51 +25,38 @@
 <nav class="nav blue-grey darken-4">
     <div class="nav-wrapper">
         <div class="container">
-            <a href="{% url 'users:logout' %}">Sign out</a>
+            <a href="#" class="brand-logo">HomeSec</a>
         </div>
     </div>
 </nav>
 <div class="container">
 	<div class="row"></div>
+	<div class="row">
+		<h4 class="container center-align">Sign in</h4>
+	</div>
     {% if messages %}
     <div class="container">
 
         {% for message in messages %}
+            {% if message.tags == 'success' %}
                 <div class="card-panel green lighten-3">
                 {{message}}
                 </div>
+            {% else %}
+                <div class="card-panel red lighten-3">
+                {{message}}
+                </div>
+            {% endif %}
         {% endfor %}
 
     </div>
     {% endif %}
-	
+	<div class="container">
+		<form method="POST">
+		    {% csrf_token %}
+		    {{ form }}
+            <div class="col 12"><button type="submit" class="waves-effect waves-light btn" style="width:100%;">Sign in</button></div>
+		</form>
+		<p>Don't have an account? <a href="/register">Register</a> here.</p>
+	</div>
 </div>
-
-    {% for image in images%}
-
-    <h1>{{im.image.url}}</h1>
-
-    <img src="/media/images/{{image}}" width=240>
-
-    {% endfor %}
-
-
-
-<form action="create-camera/" method='POST'>
-        {% csrf_token %}
-        <div class="row">
-            <div class="input-field col s9"></div>
-            <div class="input-field col s1">
-                <button type='submit' class="waves-effect waves-light btn">
-                    <i class="material-icons">add</i>
-                </button>
-            </div>
-        </div>
-    </form>
-</body>
-
-<form action="create-camera/" method="POST">
-    {% csrf_token %}
-    {{ camera_form }}
-    <button type='submit'>Submit</button>
-</form>

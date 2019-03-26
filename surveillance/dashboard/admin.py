@@ -1,8 +1,7 @@
 from django.contrib import admin
-from dashboard.models import ImageList
-
+from .models import SecurityCamera, ValidIdentifier
 
 # Register your models here.
 
-
-admin.site.register(ImageList)
+admin.site.register(SecurityCamera)
+admin.site.register(ValidIdentifier)

@@ -5,7 +5,8 @@ import time
 
 def Main():
 
-	host = "10.0.0.138"
+	host = "localhost"
+	#host = '10.0.0.21'
 	port = 5003
 
 	s = socket.socket()
@@ -25,7 +26,7 @@ def Main():
 
 			for file in range(int(filecount)):
 
-				filesize = s.recv(1024).decode("utf-8")
+				filesize = s.recv(1024).decode("utf-8").strip()
 				filesize = int(filesize)
 				print("Downloading file with filesize: ", filesize)
 

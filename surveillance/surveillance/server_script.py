@@ -1,14 +1,15 @@
 
-#pass: r********p****5
 import os
 import socket
 import time
 
 
+IDENTIFIER = "XXXX"
+
 
 def Main():
 
-	host = "0.0.0.0"
+	host = "localhost"
 	port = 5003
 
 	s = socket.socket()
