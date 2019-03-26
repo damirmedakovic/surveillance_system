@@ -8,8 +8,11 @@ import time
 
 def Main():
 
-	host = "0.0.0.0"
 	port = 5003
+	IDENTIFIER = "kill"
+	HOMESEC_IP = 'localhost'
+
+	host = "0.0.0.0"
 
 	s = socket.socket()
 	s.bind(('', port))
@@ -25,8 +28,11 @@ def Main():
 		print("[+] Client with ip ", addr, " connected")
 		request = c.recv(1024)
 		request = request.decode("utf-8")
+
 		if request == "get":
 
+			IDENTIFIER = IDENTIFIER.encode()
+			c.send(IDENTIFIER)
 
 
 			file_number = 0
@@ -65,7 +71,7 @@ def Main():
 				while len(remaining_files) == 0:
 					print("[-] No new activity. Standing by...")
 					remaining_files = os.listdir("images/")
-					time.sleep(3)
+					time.sleep(10)
 		else:
 			c.send("[-] Error. Invalid Request".encode().strip())
 

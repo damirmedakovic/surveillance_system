@@ -45,31 +45,19 @@
 	
 </div>
 
-    {% for image in images%}
+    {% for key, values in cameras_dictionary.items %}
+    <h1>{{key}}</h1>
 
-    <h1>{{im.image.url}}</h1>
+    {% for v in values %}
 
-    <img src="/media/images/{{image}}" width=240>
+    <img src="/media/{{key}}/{{v}}" width=240>
 
     {% endfor %}
+    {% endfor %}
 
-
-
-<form action="create-camera/" method='POST'>
-        {% csrf_token %}
-        <div class="row">
-            <div class="input-field col s9"></div>
-            <div class="input-field col s1">
-                <button type='submit' class="waves-effect waves-light btn">
-                    <i class="material-icons">add</i>
-                </button>
-            </div>
-        </div>
-    </form>
-</body>
-
+<h1>Add a new camera</h1>
 <form action="create-camera/" method="POST">
     {% csrf_token %}
     {{ camera_form }}
-    <button type='submit'>Submit</button>
+    <button type='submit' class="waves-effect waves-light btn">Submit</button>
 </form>

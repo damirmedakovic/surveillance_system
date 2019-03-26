@@ -5,6 +5,7 @@ import time
 
 def Main():
 
+
 	host = "localhost"
 	#host = '10.0.0.21'
 	port = 5003
@@ -17,12 +18,16 @@ def Main():
 	s.send(request)
 
 	if request != "q":
+
+		IDENTIFIER = s.recv(1024).decode("utf-8")
+		print("=========", IDENTIFIER)
 	
 
 		while True:
 
 			filecount = s.recv(1024).decode("utf-8")
 			print("Downloading ", filecount, " files")
+			print("FILECOUNT", filecount)
 
 			for file in range(int(filecount)):
 
@@ -32,7 +37,7 @@ def Main():
 
 				timestamp = str(time.time())
 
-				f = open(f"images/new_{timestamp}.jpg", "wb")
+				f = open(f"{IDENTIFIER}/new_{timestamp}.jpg", "wb")
 				data = s.recv(1024)
 				total_recieved = len(data)
 				f.write(data)

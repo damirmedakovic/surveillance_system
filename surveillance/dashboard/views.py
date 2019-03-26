@@ -8,23 +8,51 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Create your views here.
+
+def update_folders(request):
+
+	#All cameras registered to this user by id. 
+	owned_cameras = SecurityCamera.objects.filter(owners=request.user)
+	owned_cameras_id = []
+
+	for camera in owned_cameras:
+		owned_cameras_id.append(camera.identifier)
+	owned_cameras_id = set(owned_cameras_id)
+
+	existing_folders = os.listdir('surveillance/media/')
+	existing_folders.remove('client_script.py')
+
+	#Check if this user just registered a camera that does not have a image folder yet. 
+	#If folder does not exist, create it using the unique identifier that only the user has. 
+	for fld in owned_cameras_id:
+		if fld not in existing_folders:
+			relative_path = f'surveillance/media/{fld}'
+			path = os.path.join(BASE_DIR, relative_path)
+			os.mkdir(path)
 
 
 def home(request):
 
-	form = AddCameraForm
+	update_folders(request)
+
+	form = AddCameraForm()
+
+	#Collect all registered cameras of this user. This gets sent to the template as context.
 	owned_cameras = SecurityCamera.objects.filter(owners=request.user)
 	owned_cameras_id = []
+
 	for camera in owned_cameras:
 		owned_cameras_id.append(camera.identifier)
+	owned_cameras_id = set(owned_cameras_id)
 
-	print("HEEEEY", owned_cameras_id)
+	cameras_dictionary = {}
+	for cam in owned_cameras_id:
+		cameras_dictionary[f'{cam}'] = os.listdir(f'surveillance/media/{cam}')
 
-	context = {'images': os.listdir('surveillance/media/images'),
-			   'camera_form': form,
-			   'owned_camera_id': owned_cameras_id
+	context = {'cameras_dictionary': cameras_dictionary,
+			   'camera_form': form
 				}
 	return render(request, "dashboard/home.html", context)
 
