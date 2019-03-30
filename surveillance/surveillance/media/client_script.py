@@ -6,9 +6,9 @@ import time
 def Main():
 
 
-	host = "localhost"
-	#host = '10.0.0.21'
-	port = 5003
+	host = "45.33.121.184"
+	#host = 'localhost'
+	port = 5004
 
 	s = socket.socket()
 	s.connect((host, port))
@@ -25,7 +25,10 @@ def Main():
 
 		while True:
 
-			filecount = s.recv(1024).decode("utf-8")
+			filecount = s.recv(1024)
+			filecount = filecount.decode("utf-8")
+			#filecount = filecount.decode()
+			#print("=========================DDD0", filecount)
 			print("Downloading ", filecount, " files")
 			print("FILECOUNT", filecount)
 

@@ -8,7 +8,7 @@ import time
 
 def Main():
 
-	port = 5003
+	port = 5004
 	IDENTIFIER = "kill"
 	HOMESEC_IP = 'localhost'
 
