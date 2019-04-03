@@ -42,26 +42,3 @@
 
     </div>
     {% endif %}
-	
-</div>
-
-    {% for key, values in cameras_dictionary.items %}
-    <h1>{{key}}</h1>
-
-    {% for v in values %}
-
-    <img src="/media/{{key}}/{{v}}" width=240>
-
-
-    {% endfor %}
-
-        <textarea></textarea><a href="alerted/"><button type='button' class="btn btn-warning">Alert security company</button></a>
-
-    {% endfor %}
-
-<h1>Add a new camera</h1>
-<form action="create-camera/" method="POST">
-    {% csrf_token %}
-    {{ camera_form }}
-    <button type='submit' class="waves-effect waves-light btn">Submit</button>
-</form>

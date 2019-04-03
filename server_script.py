@@ -8,8 +8,8 @@ import time
 
 def Main():
 
-	port = 5004
-	IDENTIFIER = "kill"
+	port = 5005
+	IDENTIFIER = "XXXX"
 	HOMESEC_IP = 'localhost'
 
 	host = "0.0.0.0"

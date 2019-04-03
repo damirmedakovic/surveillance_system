@@ -85,3 +85,11 @@ def create_camera(request):
 		messages.error(request, "The provided identifier is not registered with any camera. Make sure it's typed correctly.")
 		return redirect("dashboard:home")
 
+
+
+def alerted(request):
+
+	messages.error(request, "Sucessfully alerted security company! Help is on the way. ")
+
+
+	return render(request, "dashboard/alerted.html")

@@ -6,9 +6,9 @@ import time
 def Main():
 
 
-	host = "45.33.121.184"
-	#host = 'localhost'
-	port = 5004
+	#host = "45.33.121.184"
+	host = 'localhost'
+	port = 5005
 
 	s = socket.socket()
 	s.connect((host, port))

@@ -8,6 +8,7 @@ app_name = "dashboard"
 
 urlpatterns = [
 	path('', views.home, name='home'),
+	path('alerted/', views.alerted),
 	path('create-camera/', views.create_camera, name='create-camera'),
 
 ]
